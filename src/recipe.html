@@ -1,30 +1,31 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Plan2Plate</title>
-  </head>
-  <body>
-    <h1>This is the recipe page</h1>
-    <h2>Boeuf bourguignon</h2>
-    <ul>
-      <li>1kg högrev</li>
-      <li>200g rökt sidfläsk</li>
-      <li>2 scharlottenlökar</li>
-      <li>3 vitlöksklyftor</li>
-      <li>3 morötter</li>
-      <li>1 1/2 msk tomatpuré</li>
-      <li>4 msk smör</li>
-      <li>1 1/2 dl vatten</li>
-      <li>2 msk Maizena</li>
-      <li>MYCKET rödvin, ett franskt från Bourgogne funkar alltid</li>
-      <li>2 msk konc kalvfond (eller 5)</li>
-      <li>Japansk soya</li>
-      <li>2 kvistar Timjan</li>
-      <li>3 lagerblad</li>
-      <li>Salt</li>
-      <li>Peppar</li>
-    </ul>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe - Plan2Plate</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><a href="/">🍽️ Plan2Plate</a></h1>
+    </header>
+    
+    <main>
+      <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>Loading recipe...</p>
+      </div>
+      
+      <div id="error" class="error-message hidden"></div>
+      
+      <div id="recipe-detail" class="recipe-detail hidden">
+        <!-- Recipe content will be inserted here -->
+      </div>
+    </main>
+  </div>
+
+    <script src="src/public/js/recipe.js"></script>
   </body>
 </html>
