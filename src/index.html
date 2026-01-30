@@ -1,13 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Plan2Plate</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <!-- Start page -->
-    <h1>This is a start page</h1>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan2Plate - Find Your Perfect Recipe</title>
+  <link rel="stylesheet" href="src/public/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🍽️ Plan2Plate</h1>
+      <p class="tagline">Plan your meals, simplify your life</p>
+    </header>
+    
+    <main>
+      <section class="search-section">
+        <div class="search-box">
+          <input 
+            type="text" 
+            id="search-input" 
+            placeholder="Search for recipes... (e.g., pasta, chicken, vegetarian)"
+            autocomplete="off"
+          >
+          <button id="search-btn">Search</button>
+        </div>
+      </section>
+      
+      <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>Finding delicious recipes...</p>
+      </div>
+      
+      <div id="error" class="error-message hidden"></div>
+      
+      <section id="results" class="recipe-grid"></section>
+    </main>
+    
+    <footer>
+      <p>Made with ❤️ by Patricia L.F & Emelie S.</p>
+    </footer>
+  </div>
+  
+  <script src="src/public/script.js"></script>
+</body>
 </html>
