@@ -1,6 +1,11 @@
+console.log('Recipe script loaded! ✅');
+
 const loadingEl = document.getElementById('loading');
 const errorEl = document.getElementById('error');
 const recipeDetailEl = document.getElementById('recipe-detail');
+
+// TEMPORARY MOCK DATA
+const USE_MOCK = true;
 
 // Get recipe ID from URL
 const urlParams = new URLSearchParams(window.location.search);
@@ -14,6 +19,47 @@ if (!recipeId) {
 }
 
 async function loadRecipe(id) {
+  // ========== TEMPORARY MOCK DATA ==========
+  if (USE_MOCK) {
+    console.log('Using mock recipe data...');
+    setTimeout(() => {
+      const mockRecipe = {
+        id: id,
+        title: "Creamy Tuscan Garlic Chicken",
+        image: "https://img.spoonacular.com/recipes/715538-556x370.jpg",
+        readyInMinutes: 30,
+        servings: 4,
+        extendedIngredients: [
+          { id: 1, original: "2 boneless, skinless chicken breasts" },
+          { id: 2, original: "2 tablespoons olive oil" },
+          { id: 3, original: "1 cup heavy cream" },
+          { id: 4, original: "1/2 cup chicken broth" },
+          { id: 5, original: "1 teaspoon garlic powder" },
+          { id: 6, original: "1 teaspoon Italian seasoning" },
+          { id: 7, original: "1/2 cup parmesan cheese, grated" },
+          { id: 8, original: "1 cup spinach, chopped" },
+          { id: 9, original: "1/2 cup sun-dried tomatoes" }
+        ],
+        analyzedInstructions: [
+          {
+            steps: [
+              { number: 1, step: "Season chicken breasts with salt and pepper on both sides." },
+              { number: 2, step: "Heat olive oil in a large skillet over medium-high heat. Add chicken and cook for 5-7 minutes on each side until golden brown and cooked through. Remove and set aside." },
+              { number: 3, step: "In the same skillet, add the heavy cream, chicken broth, garlic powder, Italian seasoning, and parmesan cheese. Whisk over medium-high heat until it starts to thicken." },
+              { number: 4, step: "Add the spinach and sun-dried tomatoes. Let simmer until the spinach starts to wilt." },
+              { number: 5, step: "Return the chicken to the pan and serve. Garnish with fresh parsley if desired." }
+            ]
+          }
+        ]
+      };
+      
+      displayRecipe(mockRecipe);
+      hideLoading();
+    }, 1000);
+    return;
+  }
+  // ========== END MOCK DATA ==========
+  
   try {
     const response = await fetch(`/api/recipes/${id}`);
     
@@ -188,7 +234,13 @@ function createInstructionsSection(recipe) {
 }
 
 async function downloadPDF(recipeId) {
-  try {
+    try {
+    //mock data response
+    if (USE_MOCK) {
+      alert('PDF download will be available when backend is ready!');
+      return;
+    }
+    
     const response = await fetch(`/api/recipes/${recipeId}/pdf`);
     
     if (!response.ok) {
@@ -211,6 +263,12 @@ async function emailRecipe(recipeId) {
   }
   
   try {
+    //mock data response
+    if (USE_MOCK) {
+      alert(`Email would be sent to: ${email}\n(Will work when backend is ready!)`);
+      return;
+    }
+    
     const response = await fetch(`/api/recipes/${recipeId}/email`, {
       method: 'POST',
       headers: {
