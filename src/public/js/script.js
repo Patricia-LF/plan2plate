@@ -1,8 +1,13 @@
+console.log('Script loaded! ✅');
+
 const searchInput = document.getElementById('search-input');
 const searchBtn = document.getElementById('search-btn');
 const resultsContainer = document.getElementById('results');
 const loadingEl = document.getElementById('loading');
 const errorEl = document.getElementById('error');
+
+// Temporary MOCK DATA - remove when backend is finished
+const USE_MOCK = true;  // Change to false when backend is working
 
 // Event listeners
 searchBtn.addEventListener('click', handleSearch);
@@ -21,6 +26,47 @@ async function handleSearch() {
   showLoading();
   hideError();
   clearResults();
+  
+  // ========== Temporary MOCK DATA ==========
+  if (USE_MOCK) {
+    console.log('Using mock data for testing...');
+    setTimeout(() => {
+      const mockRecipes = [
+        {
+          id: 716429,
+          title: "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs",
+          image: "https://img.spoonacular.com/recipes/716429-312x231.jpg",
+          readyInMinutes: 45,
+          servings: 2
+        },
+        {
+          id: 715538,
+          title: "Bruschetta Style Pork & Pasta",
+          image: "https://img.spoonacular.com/recipes/715538-312x231.jpg",
+          readyInMinutes: 30,
+          servings: 5
+        },
+        {
+          id: 644387,
+          title: "Chicken Parmesan",
+          image: "https://img.spoonacular.com/recipes/644387-312x231.jpg",
+          readyInMinutes: 35,
+          servings: 4
+        },
+        {
+          id: 782585,
+          title: "Cannellini Bean and Asparagus Salad",
+          image: "https://img.spoonacular.com/recipes/782585-312x231.jpg",
+          readyInMinutes: 20,
+          servings: 6
+        }
+      ];
+      displayRecipes(mockRecipes);
+      hideLoading();
+    }, 1000); // Simulates API-delay
+    return;
+  }
+  // ========== END MOCK DATA ==========
   
   try {
     const response = await fetch(`/api/recipes/search?query=${encodeURIComponent(query)}`);
