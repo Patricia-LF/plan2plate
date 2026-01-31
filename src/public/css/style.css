@@ -5,8 +5,8 @@
 }
 
 :root {
-  --primary-color: #2ecc71;
-  --primary-dark: #27ae60;
+  --primary-color: #83BC8A;
+  --primary-dark: #6e9c73;
   --secondary-color: #3498db;
   --danger-color: #e74c3c;
   --text-dark: #2c3e50;
@@ -22,7 +22,7 @@ html {
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Montserrat, sans-serif;
   min-height: 100vh;
   background-attachment: fixed;
   background-size: cover;
@@ -65,6 +65,13 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+main {
+  flex: 1;
 }
 
 /* Header */
@@ -86,6 +93,7 @@ header h1 {
 }
 
 header h1 a {
+  font-family: Love Light, cursive;
   color: var(--white);
   text-decoration: none;
 }
@@ -115,6 +123,7 @@ header h1 a {
   flex: 1;
   padding: 15px 20px;
   font-size: 1rem;
+  font-family: Montserrat, sans-serif;
   border: 2px solid var(--bg-light);
   border-radius: var(--border-radius);
   transition: border-color 0.3s;
@@ -132,6 +141,7 @@ header h1 a {
   border: none;
   border-radius: var(--border-radius);
   font-size: 1rem;
+  font-family: Montserrat, sans-serif;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s;
@@ -212,6 +222,7 @@ header h1 a {
 
 .recipe-info h3 {
   font-size: 1.3rem;
+  font-family: Montserrat, sans-serif;;
   margin-bottom: 10px;
   color: var(--text-dark);
 }
@@ -219,6 +230,7 @@ header h1 a {
 .recipe-meta {
   color: var(--text-light);
   font-size: 0.9rem;
+  font-family: Montserrat, sans-serif;
   margin-bottom: 15px;
 }
 
@@ -227,6 +239,7 @@ header h1 a {
   padding: 10px 20px;
   background: var(--secondary-color);
   color: var(--white);
+  font-family: Montserrat, sans-serif;
   text-decoration: none;
   border-radius: var(--border-radius);
   transition: background 0.3s;
@@ -273,10 +286,12 @@ header h1 a {
   background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
   padding: 30px;
   color: var(--white);
+  font-family: Montserrat, sans-serif;
 }
 
 .recipe-title-overlay h2 {
   font-size: 2.5rem;
+  font-family: Montserrat, sans-serif;
   margin-bottom: 10px;
 }
 
@@ -296,6 +311,7 @@ header h1 a {
   border: none;
   border-radius: var(--border-radius);
   font-size: 1rem;
+  font-family: Montserrat, sans-serif;
   cursor: pointer;
   transition: all 0.3s;
   text-decoration: none;
@@ -330,6 +346,7 @@ header h1 a {
 .ingredients-section h3,
 .instructions-section h3 {
   font-size: 1.5rem;
+  font-family: Montserrat, sans-serif;
   margin-bottom: 15px;
   color: var(--text-dark);
 }
@@ -375,6 +392,15 @@ footer {
   padding: 20px;
   color: var(--white);
   opacity: 0.8;
+}
+
+footer a {
+  text-decoration: none;
+  color: #83BC8A;
+}
+
+footer a:hover {
+  text-shadow: #243426 0 0 6px ;
 }
 
 /* Responsive */
