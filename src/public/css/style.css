@@ -5,12 +5,12 @@
 }
 
 :root {
-  --primary-color: #83BC8A;
-  --primary-dark: #6e9c73;
-  --secondary-color: #3498db;
+  --primary-color: #73a478;
+  --primary-dark: #618665;
+  --secondary-color: #b229b9;
   --danger-color: #e74c3c;
   --text-dark: #2c3e50;
-  --text-light: #7f8c8d;
+  --text-light: #697474;
   --bg-light: #ecf0f1;
   --white: #ffffff;
   --border-radius: 8px;
@@ -105,7 +105,7 @@ header h1 a {
 
 /* Search Section */
 .search-section {
-  background: var(--white);
+  background: #ffffff65;
   padding: 30px;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
@@ -148,7 +148,7 @@ header h1 a {
 }
 
 #search-btn:hover {
-  background: var(--primary-dark);
+  box-shadow: #d5f9d9 0 0 20px;
 }
 
 /* Loading & Error */
@@ -197,7 +197,7 @@ header h1 a {
 }
 
 .recipe-card {
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.637);
   border-radius: var(--border-radius);
   overflow: hidden;
   box-shadow: var(--shadow);
@@ -246,7 +246,7 @@ header h1 a {
 }
 
 .view-recipe-btn:hover {
-  background: #2980b9;
+  background: #83278f;
 }
 
 .no-results {
@@ -333,7 +333,7 @@ header h1 a {
 }
 
 .btn-secondary:hover {
-  background: #2980b9;
+  background: #83278f;
 }
 
 .recipe-sections {
@@ -400,7 +400,7 @@ footer a {
 }
 
 footer a:hover {
-  text-shadow: #243426 0 0 6px ;
+  color: #c7fbce;
 }
 
 /* Responsive */
