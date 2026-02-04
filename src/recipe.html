@@ -1,38 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recipe - Plan2Plate</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Love+Light&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mrs+Saint+Delafield&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=WindSong:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-  <div class="overlay-container"> 
-          <img class="img-overlay"
-          src="images/bg.jpg"
-          alt="Plates with pasta" />
-          </div>
-  <div class="container">
-    <header>
-      <h1><a href="/"><img src="/images/plate2.png" class="plate-img">Plan2Plate</a></h1>
-    </header>
-    
-    <main>
-      <div id="loading" class="loading">
-        <div class="spinner"></div>
-        <p>Loading recipe...</p>
-      </div>
-      
-      <div id="error" class="error-message hidden"></div>
-      
-      <div id="recipe-detail" class="recipe-detail hidden">
-        <!-- Recipe content will be inserted here -->
-      </div>
-    </main>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipe - Plan2Plate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Love+Light&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mrs+Saint+Delafield&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=WindSong:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/general.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/recipePage.css" />
+    <link rel="stylesheet" href="/css/mediaquery.css" />
+  </head>
+  <body>
+    <div class="overlay-container">
+      <img class="img-overlay" src="images/bg.jpg" alt="Plates with pasta" />
+    </div>
+    <div class="container">
+      <header>
+        <h1>
+          <a href="/"
+            ><img src="/images/plate2.png" class="plate-img" />Plan2Plate</a
+          >
+        </h1>
+      </header>
+
+      <main>
+        <section id="loading" class="loading">
+          <div class="spinner"></div>
+          <p>Loading recipe...</p>
+        </section>
+
+        <section id="error" class="error-message hidden"></section>
+
+        <section id="recipe-detail" class="recipe-detail hidden">
+          <!-- Recipe content will be inserted here -->
+        </section>
+      </main>
+    </div>
 
     <script src="/js/recipe.js"></script>
   </body>
