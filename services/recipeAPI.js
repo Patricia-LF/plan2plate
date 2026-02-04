@@ -11,7 +11,7 @@ async function makeRequest(url, params) {
     const response = await axios.get(url, { params });
     return response.data;
   } catch (error) {
-    if (error.response) {
+    if (error.response) {//till error-sida?
       // Spoonacular responded with error (400, 401, 404, 500 etc.)
       console.error('Spoonacular API error:', error.response.status);
       throw new Error(error.response.data.message || 'API request failed');
@@ -45,7 +45,7 @@ export async function searchRecipes(query, number = 12) {
   const data = await makeRequest(url, params);
   return data.results || [];
 }
-
+//till error-sida
 // Get details for a specific recipe
 export async function getRecipeDetails(id) {
   if (!id || isNaN(id)) {

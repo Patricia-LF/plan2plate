@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/recipes/search", async (req, res, next) => {
   try {
     const { query } = req.query;
-
+//till error-sida
     // UX: Return 200 instead of 400?
     if (!query || query.trim() === "") {
       return res.status(400).json({ error: "Missing search query" });
