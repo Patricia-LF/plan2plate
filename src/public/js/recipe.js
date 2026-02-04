@@ -6,6 +6,14 @@ import { hideLoading, showError } from "./displayState.js";
 
 console.log("Recipe script loaded! ✅");
 
+// DOM elements
+const backBtn = document.getElementById("back-btn");
+
+// Event listener. Backs to previous page, e.g. last search
+backBtn.addEventListener("click", () => {
+  window.history.back();
+});
+
 // Get recipe ID from URL
 const urlParams = new URLSearchParams(window.location.search);
 const recipeId = urlParams.get("id");
