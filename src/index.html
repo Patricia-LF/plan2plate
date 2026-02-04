@@ -25,7 +25,7 @@
 
       <main>
         <section class="search-section">
-          <div class="search-box">
+          <article class="search-box">
             <input
               type="text"
               id="search-input"
@@ -33,15 +33,15 @@
               autocomplete="off"
             />
             <button id="search-btn">Search</button>
-          </div>
+          </article>
         </section>
 
-        <div id="loading" class="loading hidden">
+        <section id="loading" class="loading hidden">
           <div class="spinner"></div>
           <p>Finding delicious recipes...</p>
-        </div>
+        </section>
 
-        <div id="error" class="error-message hidden"></div>
+        <section id="error" class="error-message hidden"></section>
 
         <section id="results" class="recipe-grid"></section>
       </main>
