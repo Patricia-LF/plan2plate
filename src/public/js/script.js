@@ -22,7 +22,7 @@ async function handleSearch() {
 
   // Validate input
   if (!query) {
-    showError("Please enter a search term");
+    showError("Please enter a search term", "warning");
     return;
   }
 
@@ -34,18 +34,29 @@ async function handleSearch() {
   try {
     // Call API
     const recipes = await searchRecipes(query);
+
+    // Handle empty/no result
+    if (recipes.length === 0) {
+      showError("No recipes found. Try another search!", "info");
+      return;
+    }
     
     // Display results
     renderRecipes(recipes);
   } catch (error) {
     console.error("Search error:", error);
-    showError(
-      error.message || "Could not load recipes. Please try again later."
-    );
+
+    // Adjusts message based on error
+    if (error.message.includes("search query")) {
+      showError("Please enter a search term", "warning");
+    } else {
+      showError("Could not load recipes. Please try again later.", "error");
+    }
   } finally {
     hideLoading();
   }
 }
 
-
+    
+    
 
