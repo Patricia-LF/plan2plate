@@ -39,7 +39,13 @@ async function loadRecipe(id) {
     setupActionListeners(id);
   } catch (error) {
     console.error("Error loading recipe:", error);
-    showError("Could not load recipe. Please try again.");
+
+      // Adjust messages
+    if (error.message.includes("not found") || error.message.includes("404")) {
+      showError("Recipe not found. Please try another one.", "info");
+    } else {
+      showError("Could not load recipe. Please try again.", "error");
+    }
   } finally {
     hideLoading();
   }
