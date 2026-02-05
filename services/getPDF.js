@@ -8,36 +8,48 @@ import mockReceipe from "./mockRecipe.js";
 const recipe = mockReceipe;
 
 // ------------ Setup ------------
-// Start a PDF document, 1st page is added by default & set size to A4 (letter by default) & set margin
+// Start a PDF document, 1st page is added by default & set size to A4 (letter by default) & set margins
 const document = new PDFDocument({ size: "A4", margin: 50 });
 
 // Connect content to an output (file)
 document.pipe(fs.createWriteStream("recipe.pdf"));
 
-// Layout: 2 columns
+// Layout - Create 2 columns for content
 const pageWidth =
   document.page.width -
   document.page.margins.left -
   document.page.margins.right;
 const gutter = 20;
-const leftColumnWidth = pageWidth * 0.33 - gutter / 2;
-const rightColumnWidth = pageWidth * 0.66 - gutter / 2;
+const leftColumnWidth = pageWidth * 0.5 - gutter / 2;
+const rightColumnWidth = pageWidth * 0.5 - gutter / 2;
 
 // ------------ Document content ------------
 // Add title
-document.fontSize(24).text(recipe.title, { width: pageWidth, align: "left" });
+document
+  .fontSize(24)
+  .text(recipe.title, { width: pageWidth, align: "left" })
+  .moveDown();
 
-// ----- Left column -----
-//INSERT INGREDIENT LIST
+const leftX = document.page.margins.left;
+const rightX = leftX + leftColumnWidth + gutter; //Upper left corner of right column
+const startY = document.y;
+
+// ----- Left column: Ingredients -----
+//Title
 document
   .fontSize(14)
-  .text("Ingredients", { width: leftColumnWidth, align: "left" });
+  .text("Ingredients", { width: leftColumnWidth, align: "left" })
+  .moveDown(0.5);
 
 // Loop out ingredient list
 recipe.extendedIngredients.forEach((ingredient) => {
   document
     .fontSize(12)
-    .text(ingredient.original, { width: leftColumnWidth, align: "left" });
+    .text(`- ${ingredient.original}`, {
+      width: leftColumnWidth,
+      align: "left",
+    })
+    .moveDown(0.3);
 });
 
 // ----- Right column -----
@@ -49,23 +61,29 @@ try {
   //document.image(recipe.image, { width: rightColumnWidth });
 
   //TEST: This image is broken
-  document.image("./../src/public/images/bg5.jpg", { width: rightColumnWidth });
+  document.image("./../src/public/images/bg5.jpg", rightX, startY, {
+    width: rightColumnWidth,
+  });
 } catch (err) {
   // Fallback image
-  document.image("./../src/public/images/thaipasta.jpg", {
+  document.image("./../src/public/images/thaipasta.jpg", rightX, startY, {
     width: rightColumnWidth,
   }); //WORKS FINE
 }
+document.moveDown(2);
 
 // INSERT INSTRUCTIONS HERE
-document.fontSize(14).text("Instructions", { width: rightColumnWidth });
+document
+  .fontSize(14)
+  .text("Instructions", { width: rightColumnWidth })
+  .moveDown(0.5);
 
 // Loop out instructions list
 recipe.analyzedInstructions[0].steps.forEach((step) => {
-  document.fontSize(12).text(`${step.number}. ${step.step}`, {
-    width: rightColumnWidth,
-    align: "left",
-  });
+  document
+    .fontSize(12)
+    .text(`${step.number}. ${step.step}`, { align: "left" })
+    .moveDown();
 });
 
 // ---------- Close document ----------
