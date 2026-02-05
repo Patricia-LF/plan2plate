@@ -13,10 +13,11 @@ export function hideLoading() {
   loadingEl?.classList.add("hidden");
 }
 
-// Shows an error message (auto-hides after 5 seconds)
-export function showError(message) {
+// Shows error message depending on type (auto-hides after 5 seconds)
+export function showError(message, type = 'error') {
   if (errorEl) {
     errorEl.textContent = message;
+    errorEl.className = `error-message ${type}`; // Add type-class
     errorEl.classList.remove("hidden");
     setTimeout(() => {
       hideError();
@@ -28,3 +29,5 @@ export function showError(message) {
 export function hideError() {
   errorEl?.classList.add("hidden");
 }
+
+
