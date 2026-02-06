@@ -1,9 +1,9 @@
 import PDFDocument from "pdfkit";
-import fs from "fs";
+//import fs from "fs";
 import axios from "axios";
 import path from "path";
 
-// Take URL to image, buffer image, infoga in PDF
+// Take URL to image, buffer image, include in PDF
 async function fetchImageBuffer(url) {
   const response = await axios.get(url, { responseType: "arraybuffer" });
   return Buffer.from(response.data, "binary");
@@ -68,11 +68,6 @@ async function createPDF(recipe, res) {
     //This will be the real code line
     const imgBuffer = await fetchImageBuffer(recipe.image);
     document.image(imgBuffer, rightX, startY, { width: rightColumnWidth });
-
-    //TEST: This image is broken
-    // document.image("./../src/public/images/bg5.jpg", rightX, startY, {
-    //   width: rightColumnWidth,
-    // });
   } catch (err) {
     // Fallback image
     const fallbackPath = path.resolve("src/public/images/thaipasta.jpg");
@@ -82,13 +77,13 @@ async function createPDF(recipe, res) {
   }
   document.moveDown(2);
 
-  // INSERT INSTRUCTIONS HERE
+  // Instruction title
   document
     .fontSize(14)
     .text("Instructions", { width: rightColumnWidth })
     .moveDown(0.5);
 
-  // Loop out instructions list
+  // Loop out list of instructions
   recipe.analyzedInstructions[0].steps.forEach((step) => {
     document
       .fontSize(12)
