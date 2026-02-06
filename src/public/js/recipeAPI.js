@@ -6,6 +6,7 @@ export async function searchRecipes(query) {
   const response = await fetch(
     `/api/recipes/search?query=${encodeURIComponent(query)}`,
   );
+
   if (!response.ok) {
     const errorData = await response.json();
     throw new Error(errorData.error || "Failed to fetch recipes");
@@ -18,6 +19,7 @@ export async function searchRecipes(query) {
 // Returns a recipe data object
 export async function getRecipeById(id) {
   const response = await fetch(`/api/recipes/${id}`);
+
   if (!response.ok) {
     throw new Error("Failed to load recipe");
   }
@@ -29,7 +31,7 @@ export async function getRecipeById(id) {
 // Returns an object with pdfUrl
 // export async function generateRecipePDF(recipeId) {
 //   const response = await fetch(`/api/recipes/${recipeId}/pdf`);
-//   //till error-sida
+//   
 //   if (!response.ok) {
 //     throw new Error("Failed to generate PDF");
 //   }
@@ -55,7 +57,7 @@ export async function emailRecipe(recipeId, email) {
     },
     body: JSON.stringify({ email }),
   });
-  //till error-sida
+  
   if (!response.ok) {
     throw new Error("Failed to send email");
   }
