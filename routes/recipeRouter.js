@@ -43,17 +43,6 @@ router.get("/recipes/:id", async (req, res, next) => {
   }
 });
 
-// Get PDF file
-// router.get("/recipes/:id/pdf", async (req, res, next) => {
-//   try {
-//     return res
-//       .status(501)
-//       .json({ error: "PDF generation not implemented yet" });
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-
 // POST: Send PDF as email
 // router.post("/recipes/:id/email", async (req, res, next) => {
 //   try {
