@@ -8,7 +8,9 @@
   --primary-color: #73a478;
   --primary-dark: #618665;
   --secondary-color: #b229b9;
-  --danger-color: #e74c3c;
+  --error-color: #e74c3c;
+  --warning-color: #d35400;
+  --info-color: #b8860b;
   --text-dark: #2c3e50;
   --text-light: #697474;
   --bg-light: #ecf0f1;
@@ -72,4 +74,39 @@ body {
 
 main {
   flex: 1;
+}
+
+/* Error messages - used on both search and recipe pages */
+.error-message {
+  padding: 20px;
+  border-radius: var(--border-radius);
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.error-message.error {
+  background: #fee;
+  color: var(--error-color);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  text-align: center;
+  margin-bottom: 20px;
+  border: 1px solid var(--error-color);
+}
+
+.error-message.warning {
+  background: #ffe5cc;
+  color: var(--warning-color);
+  border: 1px solid #e67e22;
+}
+
+.error-message.info {
+  background: #fff9e6;
+  color: var(--info-color);
+  border: 1px solid #f39c12;
+}
+
+.hidden {
+  display: none;
 }
