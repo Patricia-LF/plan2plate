@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import url from "url";
 import recipeRoutes from "./routes/recipeRouter.js";
+import PDFRouter from "./routes/PDFRouter.js";
 
 const app = express();
 const port = 3000;
@@ -13,6 +14,9 @@ app.use(express.static(path.join(__dirname, "src/public/")));
 
 // Connect to API
 app.use("/api", recipeRoutes);
+
+// Enable PDF
+app.use("/pdf", PDFRouter);
 
 // File paths
 const filePath = path.join(__dirname, "./", "src", "/index.html");
