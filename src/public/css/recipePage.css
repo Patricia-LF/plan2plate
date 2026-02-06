@@ -124,3 +124,27 @@
   color: var(--primary-color);
   margin-right: 10px;
 }
+
+.back-btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#back-btn {
+  padding: 15px 30px;
+  margin: 40px;
+  background: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-family: Montserrat, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#back-btn:hover {
+  box-shadow: #d5f9d9 0 0 20px;
+}
