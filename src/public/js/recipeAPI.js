@@ -6,7 +6,7 @@ export async function searchRecipes(query) {
   const response = await fetch(
     `/api/recipes/search?query=${encodeURIComponent(query)}`
   );
-//till error-sida
+
   if (!response.ok) {
     const errorData = await response.json();
     throw new Error(errorData.error || "Failed to fetch recipes");
@@ -19,7 +19,7 @@ export async function searchRecipes(query) {
 // Returns a recipe data object
 export async function getRecipeById(id) {
   const response = await fetch(`/api/recipes/${id}`);
-//till error-sida
+
   if (!response.ok) {
     throw new Error("Failed to load recipe");
   }

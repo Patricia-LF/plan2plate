@@ -11,7 +11,7 @@ async function makeRequest(url, params) {
     const response = await axios.get(url, { params });
     return response.data;
   } catch (error) {
-    if (error.response) {//till error-sida?
+    if (error.response) {
       // Spoonacular responded with error (400, 401, 404, 500 etc.)
       console.error('Spoonacular API error:', error.response.status);
       throw new Error(error.response.data.message || 'API request failed');
@@ -35,7 +35,7 @@ export async function searchRecipes(query, number = 12) {
 
   const url = `${BASE_URL}/recipes/complexSearch`;
   const params = {
-    apiKey: process.env.API_KEY,  // ← API_KEY is used here
+    apiKey: API_KEY,  // ← API_KEY is used here
     query: query.trim(),
     number,
     addRecipeInformation: true,
@@ -45,7 +45,7 @@ export async function searchRecipes(query, number = 12) {
   const data = await makeRequest(url, params);
   return data.results || [];
 }
-//till error-sida
+
 // Get details for a specific recipe
 export async function getRecipeDetails(id) {
   if (!id || isNaN(id)) {
@@ -54,7 +54,7 @@ export async function getRecipeDetails(id) {
 
   const url = `${BASE_URL}/recipes/${id}/information`;
   const params = {
-    apiKey: process.env.API_KEY,  // ← API_KEY is used here
+    apiKey: API_KEY,  // ← API_KEY is used here
     includeNutrition: false
   };
   
