@@ -72,9 +72,10 @@ async function handleDownloadPDF(recipeId) {
   try {
     const data = await generateRecipePDF(recipeId);
     window.open(data.pdfUrl, "_blank");
+   
   } catch (error) {
     console.error("PDF generation error:", error);
-    alert("Could not generate PDF. Please try again.");
+    showError("Could not generate PDF. Please try again.", "error");
   }
 }
 
@@ -84,15 +85,16 @@ async function handleEmailRecipe(recipeId) {
 
   // Validate email
   if (!email || !email.includes("@")) {
-    alert("Please enter a valid email address");
+    showError("Please enter a valid email address", "warning");
     return;
   }
 
   try {
     await emailRecipe(recipeId, email);
-    alert("Recipe sent to your email!");
+    showError("Recipe sent to your email!", "success"); //green success message
   } catch (error) {
     console.error("Email error:", error);
-    alert("Could not send email. Please try again.");
+    showError("Could not send email. Please try again.", "error");
   }
 }
+
