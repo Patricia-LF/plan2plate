@@ -29,23 +29,29 @@ export async function getRecipeById(id) {
 
 // Requests PDF generation for a recipe
 // Returns an object with pdfUrl
-// export async function generateRecipePDF(recipeId) {
-//   const response = await fetch(`/api/recipes/${recipeId}/pdf`);
-//   
-//   if (!response.ok) {
-//     throw new Error("Failed to generate PDF");
-//   }
-
-//   return response.json();
-// }
-
-// Requests PDF generation for a recipe
-// Returns an object with pdfUrl
 export async function generateRecipePDF(recipeId) {
+  // Check if PDF can be generated without downloading the entire file
+  const response = await fetch(`/pdf/${recipeId}`, { 
+    method: 'HEAD'  // HEAD request only checks if URL works
+  });
+  
+  // If request fails, throw error
+  if (!response.ok) {
+    throw new Error("Failed to generate PDF");
+  }
+  
+  // If successful, return URL to open in new window
   return {
     pdfUrl: `/pdf/${recipeId}`,
   };
 }
+// Requests PDF generation for a recipe
+// Returns an object with pdfUrl
+//export async function generateRecipePDF(recipeId) {
+  //return {
+    //pdfUrl: `/pdf/${recipeId}`,
+  //};
+//}
 
 // Sends a recipe via email
 // Returns response data
