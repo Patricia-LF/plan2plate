@@ -1,5 +1,6 @@
 import express from "express";
 import { searchRecipes, getRecipeDetails } from "../services/recipeAPI.js";
+import { sendRecipeEmail } from "../services/emailService.js";
 
 const router = express.Router();
 
@@ -43,13 +44,28 @@ router.get("/recipes/:id", async (req, res, next) => {
   }
 });
 
-// POST: Send PDF as email
-// router.post("/recipes/:id/email", async (req, res, next) => {
-//   try {
-//     return res.status(501).json({ error: "Email sending not implemented yet" });
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+// POST: Send recipe via email
+router.post("/recipes/:id/email", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { email } = req.body;
+    
+    if (!email || !email.includes('@')) {
+      return res.status(400).json({ error: 'Valid email address required' });
+    }
+    
+    const recipe = await getRecipeDetails(id);
+    
+    if (!recipe) {
+      return res.status(404).json({ error: 'Recipe not found' });
+    }
+    
+    await sendRecipeEmail(email, recipe);
+    
+    res.json({ success: true, message: 'Email sent successfully' });
+  } catch (err) {
+    next(err);
+  }
+});
 
 export default router;
