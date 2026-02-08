@@ -30,22 +30,20 @@ if (!recipeId) {
 async function loadRecipe(id) {
   try {
     // Fetch recipe from API
-    const recipe = await getRecipeById(id);
+    const result = await getRecipeById(id);
+    
+    if (!result.ok) {
+      showError(result.message, result.type);
+      hideLoading();
+      return;
+    }
     
     // Display the recipe
-    displayRecipe(recipe);
-    
-    // Set up event listeners for actions (PDF & Email)
+    displayRecipe(result.data);
     setupActionListeners(id);
   } catch (error) {
     console.error("Error loading recipe:", error);
-
-      // Adjust messages
-    if (error.message.includes("not found") || error.message.includes("404")) {
-      showError("Recipe not found. Please try another one.", "info");
-    } else {
-      showError("Could not load recipe. Please try again.", "error");
-    }
+    showError("Connection failed. Please try again.", "error");
   } finally {
     hideLoading();
   }
@@ -70,11 +68,17 @@ function setupActionListeners(recipeId) {
 // Handles PDF download
 async function handleDownloadPDF(recipeId) {
   try {
-    const data = await generateRecipePDF(recipeId);
-    window.open(data.pdfUrl, "_blank");
+    const result = await generateRecipePDF(recipeId);
+    
+    if (!result.ok) {
+      showError(result.message, result.type);
+      return;
+    }
+    
+    window.open(result.pdfUrl, "_blank");
   } catch (error) {
     console.error("PDF generation error:", error);
-    showError("Could not generate PDF. Please try again.", "error");
+    showError("Connection failed. Please try again.", "error");
   }
 }
 
@@ -89,11 +93,17 @@ async function handleEmailRecipe(recipeId) {
   }
 
   try {
-    await emailRecipe(recipeId, email);
+    const result = await emailRecipe(recipeId, email);
+    
+    if (!result.ok) {
+      showError(result.message, result.type);
+      return;
+    }
+    
     showError("Recipe sent to your email!", "success"); //green success message
   } catch (error) {
     console.error("Email error:", error);
-    showError("Could not send email. Please try again.", "error");
+    showError("Connection failed. Please try again.", "error");
   }
 }
 

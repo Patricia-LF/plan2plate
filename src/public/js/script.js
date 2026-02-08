@@ -33,9 +33,17 @@ async function handleSearch() {
 
   try {
     // Call API
-    const recipes = await searchRecipes(query);
+    const result = await searchRecipes(query);
 
-    // Handle empty/no result
+    // Check if request was successful
+    if (!result.ok) {
+      showError(result.message, result.type);
+      return;
+    }
+
+    const recipes = result.data;
+
+    // Handle empty result
     if (recipes.length === 0) {
       showError("No recipes found. Try another search!", "info");
       return;
@@ -44,9 +52,14 @@ async function handleSearch() {
     // Display results
     renderRecipes(recipes);
   } catch (error) {
+    // Network error
     console.error("Search error:", error);
-
-    // Adjusts message based on error
+    showError("Connection failed. Please try again later.", "error");
+  } finally {
+    hideLoading();
+  }
+}
+    /* // Adjusts message based on error
     if (error.message.includes("search query")) {
       showError("Please enter a search term", "warning");
     } else {
@@ -55,7 +68,7 @@ async function handleSearch() {
   } finally {
     hideLoading();
   }
-}
+} */
 
     
     
