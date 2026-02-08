@@ -9,10 +9,7 @@ dotenv.config();
 
 // Debug: verify that email environment variables are loaded
 console.log("EMAIL_USER:", process.env.EMAIL_USER);
-console.log(
-  "EMAIL_PASS:",
-  process.env.EMAIL_PASS ? "FINNS" : "SAKNAS"
-);
+console.log("EMAIL_PASS:", process.env.EMAIL_PASS ? "FINNS" : "SAKNAS");
 
 const app = express();
 const port = 3000;
@@ -23,28 +20,27 @@ const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Connect stylesheets & scrips
+// Serve static files (CSS, JS, images)
 app.use(express.static(path.join(__dirname, "src/public/")));
 
-// Connect to API
+// Routers
 app.use("/api", recipeRoutes);
-
-// Enable PDF
 app.use("/pdf", PDFRouter);
 
-// File paths
-const filePath = path.join(__dirname, "./", "src", "/index.html");
-const filePathRecipe = path.join(__dirname, "./", "src", "/recipe.html");
-const fileError = path.join(__dirname, "./", "src", "/error.html");
+// HTML File paths
+const viewsPath = path.join(__dirname, "./src/");
+const fileIndex = path.join(viewsPath, "index.html");
+const fileRecipe = path.join(viewsPath, "recipe.html");
+const fileError = path.join(viewsPath, "error.html");
 
 // Route for Start page
 app.get("/", (req, res) => {
-  res.sendFile(filePath);
+  res.sendFile(fileIndex);
 });
 
 //Route for Recipe page
 app.get("/recipe", (req, res) => {
-  res.sendFile(filePathRecipe);
+  res.sendFile(fileRecipe);
 });
 
 // Wildcard for wrong URLs, 404
@@ -64,5 +60,5 @@ app.use((err, req, res, next) => {
 
 //Start port
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Server running at port ${port}`);
 });
