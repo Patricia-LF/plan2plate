@@ -37,11 +37,14 @@ async function loadRecipe(id) {
       hideLoading();
       return;
     }
-    
-    // Display the recipe
+
+  // Display the recipe
     displayRecipe(result.data);
+    
+    // Set up event listeners for actions (PDF & Email)
     setupActionListeners(id);
   } catch (error) {
+    // Network error
     console.error("Error loading recipe:", error);
     showError("Connection failed. Please try again.", "error");
   } finally {
@@ -78,7 +81,7 @@ async function handleDownloadPDF(recipeId) {
     window.open(result.pdfUrl, "_blank");
   } catch (error) {
     console.error("PDF generation error:", error);
-    showError("Connection failed. Please try again.", "error");
+    showError("Could not generate PDF. Please try again.", "error");
   }
 }
 
@@ -103,7 +106,6 @@ async function handleEmailRecipe(recipeId) {
     showError("Recipe sent to your email!", "success"); //green success message
   } catch (error) {
     console.error("Email error:", error);
-    showError("Connection failed. Please try again.", "error");
+    showError("Could not send email. Please try again.", "error");
   }
 }
-
