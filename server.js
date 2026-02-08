@@ -9,6 +9,10 @@ const port = 3000;
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // Connect stylesheets & scrips
 app.use(express.static(path.join(__dirname, "src/public/")));
 
@@ -41,7 +45,8 @@ app.get("*s", (req, res) => {
 // Global 500 handler - if API connection fails/no recipe is found with those limits/something when wrong check your input - show error on start page!
 app.use((err, req, res, next) => {
   console.error(err.message);
-  res.status(500).json({ error: "Something went wrong. Please try again later." });
+  const status = err.status || 500;
+  res.status(status).json({ error: err.message || "Something went wrong. Please try again later." });
 });
 
 //Start port
