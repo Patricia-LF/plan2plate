@@ -3,23 +3,16 @@ import PDFDocument from "pdfkit";
 import axios from "axios";
 import path from "path";
 
-// Take URL to image, buffer image, include in PDF
+// Convert URL to image
 async function fetchImageBuffer(url) {
   const response = await axios.get(url, { responseType: "arraybuffer" });
   return Buffer.from(response.data, "binary");
 }
 
-// For Dev-phase
-// import mockReceipe from "./mockRecipe.js";
-// const recipe = mockReceipe;
-
 async function createPDF(recipe, res) {
   // ------------ Setup ------------
   // Start a PDF document, 1st page is added by default & set size to A4 (letter by default) & set margins
   const document = new PDFDocument({ size: "A4", margin: 50 });
-
-  // Connect content to an output (file)
-  // document.pipe(fs.createWriteStream("recipe.pdf"));
 
   // Connect to browser/client
   document.pipe(res);
@@ -63,9 +56,8 @@ async function createPDF(recipe, res) {
   });
 
   // ----- Right column -----
-  // Add image
   try {
-    //This will be the real code line
+    // Add image from API
     const imgBuffer = await fetchImageBuffer(recipe.image);
     document.image(imgBuffer, rightX, startY, { width: rightColumnWidth });
   } catch (err) {
@@ -73,7 +65,7 @@ async function createPDF(recipe, res) {
     const fallbackPath = path.resolve("src/public/images/thaipasta.jpg");
     document.image(fallbackPath, rightX, startY, {
       width: rightColumnWidth,
-    }); //TESTING!
+    });
   }
   document.moveDown(2);
 
