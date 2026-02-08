@@ -38,10 +38,14 @@ app.get("*s", (req, res) => {
   res.status(404).sendFile(fileError);
 });
 
-// Global 500 handler - if API connection fails/no recipe is found with those limits/something when wrong check your input - show error on start page!
+//Global error handler
 app.use((err, req, res, next) => {
   console.error(err.message);
-  res.status(500).json({ error: "Something went wrong. Please try again later." });
+
+  const status = err.status || 500;
+  const message = err.message || "Something went wrong. Please try again later";
+
+  res.status(status).json({ error: message });
 });
 
 //Start port
