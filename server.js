@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, "src/public/")));
 app.use("/api", recipeRoutes);
 app.use("/pdf", PDFRouter);
 
-// HTML File paths
+// HTML file paths
 const viewsPath = path.join(__dirname, "./src/");
 const fileIndex = path.join(viewsPath, "index.html");
 const fileRecipe = path.join(viewsPath, "recipe.html");
