@@ -41,7 +41,7 @@ app.get("*s", (req, res) => {
 // Global 500 handler - if API connection fails/no recipe is found with those limits/something when wrong check your input - show error on start page!
 app.use((err, req, res, next) => {
   console.error(err.message);
-  res.status(500).json({ error: "Internal server error" });
+  res.status(500).json({ error: "Something went wrong. Please try again later." });
 });
 
 //Start port

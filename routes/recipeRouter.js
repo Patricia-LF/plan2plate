@@ -10,7 +10,7 @@ router.get("/recipes/search", async (req, res, next) => {
 
     // UX: Return 200 instead of 400?
     if (!query || query.trim() === "") {
-      return res.status(400).json({ error: "Missing search query" });
+      return res.status(400).json({ error: "Please enter a search term" });
     }
 
     const results = await searchRecipes(query);
