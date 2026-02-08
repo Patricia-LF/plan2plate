@@ -12,6 +12,15 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+//Verify SMTP connection on startup (development/debugging only) 
+transporter.verify((error, success) => {
+  if (error) {
+    console.error("SMTP verify failed:", error);
+  } else {
+    console.log("SMTP server is ready to take our emails 🚀");
+  }
+});
+
 export async function sendRecipeEmail(recipientEmail, recipe) {
   try {
     const mailOptions = {
