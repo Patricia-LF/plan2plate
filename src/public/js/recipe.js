@@ -20,7 +20,7 @@ const recipeId = urlParams.get("id");
 
 // Validate and load recipe
 if (!recipeId) {
-  showError("No recipe ID provided");
+  showError("No recipe ID provided", "warning");
   hideLoading();
 } else {
   loadRecipe(recipeId);
@@ -72,7 +72,6 @@ async function handleDownloadPDF(recipeId) {
   try {
     const data = await generateRecipePDF(recipeId);
     window.open(data.pdfUrl, "_blank");
-   
   } catch (error) {
     console.error("PDF generation error:", error);
     showError("Could not generate PDF. Please try again.", "error");
