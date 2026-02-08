@@ -1,3 +1,22 @@
+//recipeAPI.js
+// Requests PDF generation for a recipe
+// Returns an object with pdfUrl
+// export async function generateRecipePDF(recipeId) {
+//   const response = await fetch(`/api/recipes/${recipeId}/pdf`);
+//   
+//   if (!response.ok) {
+//     throw new Error("Failed to generate PDF");
+//   }
+
+//   return response.json();
+// }
+
+//server.js
+/* app.use((err, req, res, next) => {
+  console.error(err.message);
+  res.status(500).json({ error: "Something went wrong. Please try again later." });
+}); */
+
 //RECIPE.js
 /* console.log('Recipe script loaded! ✅');
 
