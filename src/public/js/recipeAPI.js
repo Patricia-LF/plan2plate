@@ -1,5 +1,13 @@
 // recipeAPI.js - Handles all API calls to the backend
 
+// Helper function to determine error type from status code
+function getErrorType(status) {
+  if (status === 400) return "warning";
+  if (status === 404) return "info";
+  if (status >= 500) return "error";
+  return "error";
+}
+
 // Searches for recipes based on a search term
 // Returns an array of recipe objects
 export async function searchRecipes(query) {
@@ -7,24 +15,40 @@ export async function searchRecipes(query) {
     `/api/recipes/search?query=${encodeURIComponent(query)}`,
   );
 
+  const data = await response.json();
+
   if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.error || "Failed to fetch recipes");
+    return {
+      ok: false,
+      message: data.error,
+      type: getErrorType(response.status)
+    };
   }
 
-  return response.json();
+  return {
+    ok: true,
+    data: data
+  };
 }
 
 // Fetches a specific recipe by ID
 // Returns a recipe data object
 export async function getRecipeById(id) {
   const response = await fetch(`/api/recipes/${id}`);
+  const data = await response.json();
 
   if (!response.ok) {
-    throw new Error("Failed to load recipe");
+    return {
+      ok: false,
+      message: data.error,
+      type: getErrorType(response.status)
+    };
   }
 
-  return response.json();
+  return {
+    ok: true,
+    data: data
+  };
 }
 
 // Requests PDF generation for a recipe
@@ -34,24 +58,20 @@ export async function generateRecipePDF(recipeId) {
   const response = await fetch(`/pdf/${recipeId}`, { 
     method: 'HEAD'  // HEAD request only checks if URL works
   });
-  
-  // If request fails, throw error
+
   if (!response.ok) {
-    throw new Error("Failed to generate PDF");
+    return {
+      ok: false,
+      message: "Could not generate PDF",
+      type: "error"
+    };
   }
-  
-  // If successful, return URL to open in new window
+
   return {
-    pdfUrl: `/pdf/${recipeId}`,
+    ok: true,
+    pdfUrl: `/pdf/${recipeId}`
   };
 }
-// Requests PDF generation for a recipe
-// Returns an object with pdfUrl
-//export async function generateRecipePDF(recipeId) {
-  //return {
-    //pdfUrl: `/pdf/${recipeId}`,
-  //};
-//}
 
 // Sends a recipe via email
 // Returns response data
@@ -63,10 +83,19 @@ export async function emailRecipe(recipeId, email) {
     },
     body: JSON.stringify({ email }),
   });
-  
+
+  const data = await response.json();
+
   if (!response.ok) {
-    throw new Error("Failed to send email");
+    return {
+      ok: false,
+      message: data.error,
+      type: getErrorType(response.status)
+    };
   }
 
-  return response.json();
+  return {
+    ok: true,
+    data: data
+  };
 }
