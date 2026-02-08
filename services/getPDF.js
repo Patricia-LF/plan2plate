@@ -1,12 +1,19 @@
 import PDFDocument from "pdfkit";
-//import fs from "fs";
 import axios from "axios";
 import path from "path";
+import url from "url";
+
+// dirname for fallback image
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 // Convert URL to image
 async function fetchImageBuffer(url) {
-  const response = await axios.get(url, { responseType: "arraybuffer" });
-  return Buffer.from(response.data, "binary");
+  try {
+    const response = await axios.get(url, { responseType: "arraybuffer" });
+    return Buffer.from(response.data, "binary");
+  } catch (err) {
+    return null;
+  }
 }
 
 async function createPDF(recipe, res) {
@@ -62,7 +69,10 @@ async function createPDF(recipe, res) {
     document.image(imgBuffer, rightX, startY, { width: rightColumnWidth });
   } catch (err) {
     // Fallback image
-    const fallbackPath = path.resolve("src/public/images/thaipasta.jpg");
+    const fallbackPath = path.join(
+      __dirname,
+      "../src/public/images/thaipasta.jpg",
+    );
     document.image(fallbackPath, rightX, startY, {
       width: rightColumnWidth,
     });
