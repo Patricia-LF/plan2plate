@@ -59,16 +59,7 @@ async function handleSearch() {
     hideLoading();
   }
 }
-    /* // Adjusts message based on error
-    if (error.message.includes("search query")) {
-      showError("Please enter a search term", "warning");
-    } else {
-      showError("Could not load recipes. Please try again later.", "error");
-    }
-  } finally {
-    hideLoading();
-  }
-} */
+
 
     
     
