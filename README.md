@@ -24,6 +24,7 @@ Includes an input field where user types in their email address. User clicks sen
 ### 3. Technical requirements:
 
 - Backend built with Node & Express
+- Axios to make HTTP requests from client-side
 - API requests to Spoonacular
 - Creating PDF files with PDFKit
 - Email sending with Nodemailer
