@@ -21,7 +21,7 @@ async function createPDF(recipe, res) {
   // Start a PDF document, 1st page is added by default & set size to A4 (letter by default) & set margins
   const document = new PDFDocument({ size: "A4", margin: 50 });
 
-  // Connect to browser/client
+  // Send file directly to client
   document.pipe(res);
 
   // Layout - Create 2 columns for content
