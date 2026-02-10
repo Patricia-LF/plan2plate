@@ -13,7 +13,7 @@ export function hideLoading() {
   loadingEl?.classList.add("hidden");
 }
 
-// Shows error message depending on type (auto-hides after 5 seconds)
+// Shows error message depending on type
 export function showError(message, type = 'error') {
   if (errorEl) {
     errorEl.textContent = message;
