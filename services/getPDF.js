@@ -71,7 +71,7 @@ async function createPDF(recipe, res) {
     // Fallback image
     const fallbackPath = path.join(
       __dirname,
-      "../src/public/images/thaipasta.jpg",
+      "../src/public/images/fallback-unsplash.jpg",
     );
     document.image(fallbackPath, rightX, startY, {
       width: rightColumnWidth,
