@@ -17,14 +17,14 @@ transporter.verify((error, success) => {
   if (error) {
     console.error("SMTP verify failed:", error);
   } else {
-    console.log("SMTP server is ready to take our emails 🚀");
+    console.log("SMTP server is ready to take our emails");
   }
 });
 
 export async function sendRecipeEmail(recipientEmail, recipe) {
   try {
     const mailOptions = {
-      from: process.env.EMAIL_USER,
+      from: `Plan2Plate 🍽️ <${process.env.EMAIL_USER}>`, //change sender name
       to: recipientEmail,
       subject: `Recipe: ${recipe.title}`,
       html: recipeEmailTemplate(recipe)  // Use template
