@@ -1,3 +1,12 @@
+# Plan2Plate
+
+This is a school project in node.js where we use the open API Spoonacular (https://spoonacular.com/food-api) to search for recipes based on ingredients, cuisines or special diets/intolerances. When you find something you love, save it as a PDF or send it straight to your inbox - perfect for simple grocery shopping without juggling screenshots, sticky notes or endless copy-paste.
+
+## Installation
+
+git clone https://github.com/Patricia-LF/plan2plate.git
+In Terminal at root of project: npm install (this installs all dependencies listed in package.json)
+
 ## MVP
 
 ### 1. START PAGE (Search View)
