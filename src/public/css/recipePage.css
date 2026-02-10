@@ -148,3 +148,17 @@
 #back-btn:hover {
   box-shadow: #d5f9d9 0 0 20px;
 }
+
+@media (min-width: 768px) {
+  header h1 {
+    font-size: 4rem;
+  }
+  
+  .recipe-sections {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .recipe-title-overlay h2 {
+    font-size: 2.5rem;
+  }
+}

@@ -143,3 +143,17 @@
   font-size: 1.2rem;
   color: var(--text-light);
 }
+
+@media (min-width: 768px) {
+  header h1 {
+    font-size: 4rem;
+  }
+
+  .search-box {
+    flex-direction: row;
+  }
+
+  .recipe-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}

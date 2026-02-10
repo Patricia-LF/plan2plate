@@ -32,3 +32,9 @@
 .message-container button:hover {
     box-shadow: #424e43 0 0 10px;
 }
+
+@media (min-width: 768px) {
+  header h1 {
+   font-size: 4rem;
+ }
+}
