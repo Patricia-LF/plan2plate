@@ -24,7 +24,7 @@ async function makeRequest(url, params) {
       console.error('No response from Spoonacular API');
       
       const err = new Error('No response from recipe API');
-      err.status = 503;  // ← Service Unavailable
+      err.status = 503;  // Service Unavailable
       throw err;
       
     } else {
@@ -32,7 +32,7 @@ async function makeRequest(url, params) {
       console.error('Request setup error:', error.message);
       
       const err = new Error(error.message);
-      err.status = 500;  // ← Internal Server Error
+      err.status = 500;  // Internal Server Error
       throw err;
     }
   }
@@ -48,7 +48,7 @@ export async function searchRecipes(query, number = 12) {
 
   const url = `${BASE_URL}/recipes/complexSearch`;
   const params = {
-    apiKey: API_KEY,  // ← API_KEY is used here
+    apiKey: API_KEY,  // API_KEY is used here
     query: query.trim(),
     number,
     addRecipeInformation: true,
@@ -69,7 +69,7 @@ export async function getRecipeDetails(id) {
 
   const url = `${BASE_URL}/recipes/${id}/information`;
   const params = {
-    apiKey: API_KEY,  // ← API_KEY is used here
+    apiKey: API_KEY,  // API_KEY is used here
     includeNutrition: false
   };
   
