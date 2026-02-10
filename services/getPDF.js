@@ -3,7 +3,7 @@ import axios from "axios";
 import path from "path";
 import url from "url";
 
-// dirname for fallback image
+// Path for fallback image
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 // Convert URL to image
