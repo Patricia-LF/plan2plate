@@ -1,11 +1,11 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import path from "path";
 import url from "url";
 import recipeRoutes from "./routes/recipeRouter.js";
 import PDFRouter from "./routes/PDFRouter.js";
-
-import dotenv from "dotenv";
-dotenv.config();
 
 // Debug: verify that email environment variables are loaded (remove after debug)
 console.log("EMAIL_USER:", process.env.EMAIL_USER);
