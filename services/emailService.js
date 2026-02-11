@@ -24,17 +24,18 @@ transporter.verify((error, success) => {
 export async function sendRecipeEmail(recipientEmail, recipe) {
   try {
     const mailOptions = {
-      from: `Plan2Plate 🍽️ <${process.env.EMAIL_USER}>`, //change sender name
+      from: `Plan2Plate 🍽️ <${process.env.EMAIL_USER}>`,
       to: recipientEmail,
       subject: `Recipe: ${recipe.title}`,
-      html: recipeEmailTemplate(recipe), // Use template
+      html: recipeEmailTemplate(recipe) // Use template
     };
-
+    
     await transporter.sendMail(mailOptions);
     return { success: true };
+    
   } catch (error) {
-    console.error("Email error:", error);
-    const err = new Error("Failed to send email");
+    console.error('Email error:', error);
+    const err = new Error('Failed to send email');
     err.status = 500;
     throw err;
   }
