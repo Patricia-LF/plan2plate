@@ -1,6 +1,4 @@
 // emailService.js with nodemailer
-import * as dotenv from "dotenv";
-dotenv.config();
 import nodemailer from "nodemailer";
 import { recipeEmailTemplate } from "./emailTemplate.js"; // Import template
 
