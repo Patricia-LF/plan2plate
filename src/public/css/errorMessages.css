@@ -1,0 +1,40 @@
+/* Error messages - used on both search and recipe pages */
+.error-message {
+  padding: 20px;
+  border-radius: var(--border-radius);
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.error-message.error {
+  background: #fee;
+  color: var(--error-color);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  text-align: center;
+  margin-bottom: 20px;
+  border: 1px solid var(--error-color);
+}
+
+.error-message.warning {
+  background: #ffe5cc;
+  color: var(--warning-color);
+  border: 1px solid #e67e22;
+}
+
+.error-message.info {
+  background: #fff9e6;
+  color: var(--info-color);
+  border: 1px solid #f39c12;
+}
+
+.error-message.success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #28a745;
+}
+
+.hidden {
+  display: none;
+}

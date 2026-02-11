@@ -1,0 +1,100 @@
+import PDFDocument from "pdfkit";
+import axios from "axios";
+import path from "path";
+import url from "url";
+
+// Path for fallback image
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+
+// Convert URL to image
+async function fetchImageBuffer(url) {
+  try {
+    const response = await axios.get(url, { responseType: "arraybuffer" });
+    return Buffer.from(response.data, "binary");
+  } catch (err) {
+    return null;
+  }
+}
+
+async function createPDF(recipe, res) {
+  // ------------ Setup ------------
+  // Start a PDF document, 1st page is added by default & set size to A4 (letter by default) & set margins
+  const document = new PDFDocument({ size: "A4", margin: 50 });
+
+  // Send file directly to client
+  document.pipe(res);
+
+  // Layout - Create 2 columns for content
+  const pageWidth =
+    document.page.width -
+    document.page.margins.left -
+    document.page.margins.right;
+  const gutter = 20;
+  const leftColumnWidth = pageWidth * 0.5 - gutter / 2;
+  const rightColumnWidth = pageWidth * 0.5 - gutter / 2;
+
+  // ------------ Document content ------------
+  // Add title
+  document
+    .fontSize(24)
+    .text(recipe.title, { width: pageWidth, align: "left" })
+    .moveDown();
+
+  const leftX = document.page.margins.left;
+  const rightX = leftX + leftColumnWidth + gutter; //Upper left corner of right column
+  const startY = document.y;
+
+  // ----- Left column: Ingredients -----
+  //Title
+  document
+    .fontSize(14)
+    .text("Ingredients", { width: leftColumnWidth, align: "left" })
+    .moveDown(0.5);
+
+  // Loop out ingredient list
+  recipe.extendedIngredients.forEach((ingredient) => {
+    document
+      .fontSize(12)
+      .text(`- ${ingredient.original}`, {
+        width: leftColumnWidth,
+        align: "left",
+      })
+      .moveDown(0.3);
+  });
+
+  // ----- Right column -----
+  try {
+    // Add image from API
+    const imgBuffer = await fetchImageBuffer(recipe.image);
+    document.image(imgBuffer, rightX, startY, { width: rightColumnWidth });
+  } catch (err) {
+    // Fallback image
+    const fallbackPath = path.join(
+      __dirname,
+      "../src/public/images/fallback-unsplash.jpg",
+    );
+    document.image(fallbackPath, rightX, startY, {
+      width: rightColumnWidth,
+    });
+  }
+  document.moveDown(2);
+
+  // Instruction title
+  document
+    .fontSize(14)
+    .text("Instructions", { width: rightColumnWidth })
+    .moveDown(0.5);
+
+  // Loop out list of instructions
+  recipe.analyzedInstructions[0].steps.forEach((step) => {
+    document
+      .fontSize(12)
+      .text(`${step.number}. ${step.step}`, { align: "left" })
+      .moveDown();
+  });
+
+  // ---------- Close document ----------
+  document.end();
+}
+
+export default createPDF;

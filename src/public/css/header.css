@@ -1,0 +1,27 @@
+header {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--white);
+}
+
+header .plate-img {
+  height: 80px;
+}
+
+header h1 {
+  font-size: 2rem;
+  font-family:Love Light, cursive;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+header h1 a {
+  font-family:Love Light, cursive;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
