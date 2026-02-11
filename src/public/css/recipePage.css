@@ -34,6 +34,31 @@
   margin-bottom: 10px;
 }
 
+/* Loading */
+.loading {
+  text-align: center;
+  padding: 40px;
+  background: var(--white);
+  border-radius: var(--border-radius);
+  margin-bottom: 20px;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--bg-light);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .recipe-content {
   padding: 30px;
 }
