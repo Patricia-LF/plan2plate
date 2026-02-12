@@ -19,6 +19,9 @@ export function showError(message, type = 'error') {
     errorEl.textContent = message;
     errorEl.className = `error-message ${type}`; // Add type-class
     errorEl.classList.remove("hidden");
+
+    // Scroll to error message
+    errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 }
 
